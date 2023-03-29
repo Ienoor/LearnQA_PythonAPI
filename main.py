@@ -1,14 +1,13 @@
 import requests
-from json.decoder import JSONDecodeError
+payload = {"login": "secret_login", "password": "secret_pass"}
 
-payload = {"name": "User"}
+response = requests.post('https://playground.learnqa.ru/api/get_auth_cookie', data=payload)
+cookie_value = response.cookies.get('auth_cookie')
 
-response = requests.get('https://playground.learnqa.ru/api/hello', params=payload)
-# response = requests.get('https://playground.learnqa.ru/api/get_text')
+cookies = {}
+if cookie_value is not None:
+    cookies.update({'auth_cookie': cookie_value})
+
+
+response = requests.post('https://playground.learnqa.ru/api/check_auth_cookie', cookies=cookies)
 print(response.text)
-
-try:
-    parsed_response_text = response.json()
-    print(parsed_response_text['answer'])
-except JSONDecodeError:
-    print("Response is not JSON format")
