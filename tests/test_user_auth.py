@@ -7,8 +7,8 @@ from lib.assertions import Assertions
 
 class TestUserAuth(BaseCase):
     exclude_params = [
-        ('no_cookie'),
-        ('no_token')
+        'no_cookie',
+        'no_token'
     ]
 
     def setup(self):
