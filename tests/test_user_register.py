@@ -18,15 +18,15 @@ class TestUserRegister(BaseCase):
     def test_successful_user_creation(self):
         data = {
             'username': 'learn_qa',
-            'firstName': 'learn_qa',
-            'lastName': 'learn_qa',
+            'firstname': 'learn_qa',
+            'lastname': 'learn_qa',
             'email': self.email,
             'password': '123',
         }
         response = requests.post('https://playground.learnqa.ru/api/user/', data)
 
         Assertions.assert_status_code(response, 200)
-        Assertions.assert_json_has_id(response, 'id')
+        Assertions.assert_json_has_key(response, 'id')
 
     def test_create_user_with_existing_email(self):
         email = 'vinkotov@example.com'
